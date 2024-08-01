@@ -47,6 +47,8 @@ const UserSchema = new mongoose.Schema(
   {
     phoneNumber: { type: String, required: true, unique: true },
     isVerified: { type: Boolean, default: false },
+    isPinSetup: { type: Boolean, default: false },
+    pin: {  type: String},
     verificationCode: { type: String },
     verificationCodeExpires: { type: Date },
     profile: ProfileSchema,
