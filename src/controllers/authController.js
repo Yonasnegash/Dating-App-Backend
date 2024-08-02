@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const twilio = require("twilio");
+const path = require("path");
 
 const client = twilio(process.env.ACCOUNT_SID, process.env.AUTHTOKEN);
 
@@ -70,12 +71,25 @@ exports.checkUser = async (req, res) => {
 };
 
 exports.completeProfile = async (req, res) => {
-  const { phoneNumber, profile } = req.body;
-
   try {
+    const { phoneNumber, profile } = req.body;
+
+    let profilePictureUrl = "";
+
+    if (req.file) {
+      profilePictureUrl = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`;
+    }
+    const parsedProfile = JSON.parse(profile);
+
+    const updatedProfile = {
+      ...parsedProfile,
+      profilePictureUrl: profile.profilePictureUrl,
+    };
     const user = await User.findOneAndUpdate(
       { phoneNumber },
-      { profile, isVerified: true },
+      { profile: updatedProfile, isVerified: true },
       { new: true }
     );
 

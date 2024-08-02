@@ -193,6 +193,11 @@ const ethiopianFemaleNames = [
   // Add more names as needed
 ];
 
+const ethiopianMalePhotos = ["http://localhost:5000/uploads/Marawi.jpg"];
+
+const ethiopianFemalePhotos = [
+  "http://localhost:5000/uploads/Beautiful_Ethiopian_woman.jpeg",
+];
 const ethinicGroups = [
   "Oromo",
   "Amhara",
@@ -338,6 +343,15 @@ const createMockUser = (gender) => {
           Math.floor(Math.random() * ethiopianFemaleNames.length)
         ];
 
+  const profilePictureUrl =
+    gender === "Male"
+      ? ethiopianMalePhotos[
+          Math.floor(Math.random() * ethiopianMalePhotos.length)
+        ]
+      : ethiopianFemalePhotos[
+          Math.floor(Math.random() * ethiopianFemalePhotos.length)
+        ];
+
   return {
     phoneNumber: `+2519${faker.number.int({ min: 10000000, max: 99999999 })}`,
     isVerified: true,
@@ -426,13 +440,14 @@ const createMockUser = (gender) => {
           "Short-term",
         ]),
       },
+      profilePictureUrl: profilePictureUrl,
     },
   };
 };
 
 exports.seedData = async (req, res) => {
-  const maleUsers = Array.from({ length: 4 }, () => createMockUser("Male"));
-  const femaleUsers = Array.from({ length: 4 }, () => createMockUser("Female"));
+  const maleUsers = Array.from({ length: 1 }, () => createMockUser("Male"));
+  const femaleUsers = Array.from({ length: 1 }, () => createMockUser("Female"));
 
   try {
     await User.insertMany([...maleUsers, ...femaleUsers]);

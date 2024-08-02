@@ -2,4 +2,4 @@
 .env
 serviceAccountKey.json
 package-lock.json
-/uploads
+uploads

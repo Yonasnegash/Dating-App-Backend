@@ -41,6 +41,7 @@ const ProfileSchema = new mongoose.Schema({
   physicalAtribute: PhysicalAttributesSchema,
   interests: InterestsSchema,
   lifestyle: LifestyleSchema,
+  profilePictureUrl: { type: String },
 });
 
 const UserSchema = new mongoose.Schema(
@@ -48,14 +49,13 @@ const UserSchema = new mongoose.Schema(
     phoneNumber: { type: String, required: true, unique: true },
     isVerified: { type: Boolean, default: false },
     isPinSetup: { type: Boolean, default: false },
-    pin: {  type: String},
+    pin: { type: String },
     verificationCode: { type: String },
     verificationCodeExpires: { type: Date },
     profile: ProfileSchema,
     matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     dislikes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    profilePictureUrl: { type: String },
   },
   { timestamps: true }
 );
