@@ -85,7 +85,7 @@ exports.completeProfile = async (req, res) => {
 
     const updatedProfile = {
       ...parsedProfile,
-      profilePictureUrl: profile.profilePictureUrl,
+      profilePictureUrl: profilePictureUrl,
     };
     const user = await User.findOneAndUpdate(
       { phoneNumber },
@@ -99,7 +99,7 @@ exports.completeProfile = async (req, res) => {
       res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error", error });
   }
 };
 

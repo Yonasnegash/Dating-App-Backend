@@ -6,6 +6,8 @@ const cors = require("cors");
 const connectDB = require("./src/config/db");
 const authRoutes = require("./src/routes/authRoutes");
 const matchRoutes = require("./src/routes/matchRoutes");
+const likeRoutes = require("./src/routes/likeRoutes");
+const dislikeRoutes = require("./src/routes/dislikeRoutes");
 
 const app = express();
 
@@ -16,5 +18,7 @@ connectDB();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/matching", matchRoutes);
+app.use("/api/liking", likeRoutes);
+app.use("/api/liking", dislikeRoutes);
 
 module.exports = app;
