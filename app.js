@@ -21,4 +21,7 @@ app.use("/api/matching", matchRoutes);
 app.use("/api/liking", likeRoutes);
 app.use("/api/liking", dislikeRoutes);
 
+// Serve static files from the uploads directory
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 module.exports = app;
